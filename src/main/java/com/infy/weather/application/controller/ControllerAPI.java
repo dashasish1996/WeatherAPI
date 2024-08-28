@@ -23,17 +23,23 @@ public class ControllerAPI {
     */
     @GetMapping("/history")
     public JsonNode getWeatherHistory(@RequestParam("locationId") int locationId){
-        log.info("Have started the application");
-        return null;
+        return service.getHistoricalData(locationId);
     }
 
 
     /*
     Get all locations in the database
     */
-    @GetMapping("/locations")
-    public JsonNode getWeatherHistory(){
-        log.info("Have started the application");
-        return null;
+    @GetMapping("/locations/fetch")
+    public JsonNode getExistingLocations(){
+        return service.getExistingLocations();
+    }
+
+    /*
+    Check if the provided query parameter is valid
+    */
+    @GetMapping("/locations/check")
+    public JsonNode checkValidLocation(@RequestParam("queryParameter") String queryParameter){
+        return service.checkValidLocation(queryParameter);
     }
 }
