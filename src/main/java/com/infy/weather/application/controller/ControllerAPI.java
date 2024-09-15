@@ -1,13 +1,11 @@
 package com.infy.weather.application.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.infy.weather.application.model.RequestModel;
 import com.infy.weather.application.service.WeatherAPIService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -22,8 +20,8 @@ public class ControllerAPI {
     @Param locationId should match one of the location details already exists in the database
     */
     @GetMapping("/history")
-    public JsonNode getWeatherHistory(@RequestParam("locationId") int locationId){
-        return service.getHistoricalData(locationId);
+    public JsonNode getWeatherHistory(@RequestBody RequestModel locationDetails){
+        return service.getHistoricalData(locationDetails);
     }
 
 
